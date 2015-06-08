@@ -1,6 +1,6 @@
 {
   "name": "feiky",
-  "version": "0.0.1",
+  "version": "0.0.1-beta",
   "description": "A simple fake http server",
   "main": "index.js",
   "directories": {
