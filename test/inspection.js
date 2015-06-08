@@ -8,7 +8,7 @@ var savedLogLevel;
 
 // NOTE: running tests with log level 'FATAL' to suppress logging during mock server tests.
 
-describe.only('Inspection features', function () {
+describe('Inspection features', function () {
     var server = require('../index.js')(),
         port = 8000,
         url = 'http://localhost:' + port;
