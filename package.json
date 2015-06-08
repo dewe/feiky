@@ -1,0 +1,27 @@
+{
+  "name": "feiky",
+  "version": "0.0.1",
+  "description": "A simple fake http server",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dewe/feiky.git"
+  },
+  "keywords": [
+    "testing",
+    "mock",
+    "http"
+  ],
+  "author": "Johan Dewe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dewe/feiky/issues"
+  },
+  "homepage": "https://github.com/dewe/feiky"
+}
