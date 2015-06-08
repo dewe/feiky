@@ -9,7 +9,7 @@ var savedLogLevel;
 // NOTE: running tests with log level 'FATAL' to suppress logging during mock server tests.
 
 describe.only('Mock server', function () {
-    var server = require('../lib/feiky')(),
+    var server = require('../index.js')(),
         port = 8000,
         url = 'http://localhost:' + port;
 
@@ -242,8 +242,8 @@ describe.only('Mock server', function () {
 });
 
 describe('Two mock servers', function () {
-    var server_one = require('../lib/feiky.js')(),
-        server_two = require('../lib/feiky.js')();
+    var server_one = require('../index.js')(),
+        server_two = require('../index.js')();
 
     before(function () {
         server_one.listen(8000);
