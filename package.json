@@ -23,5 +23,14 @@
   "bugs": {
     "url": "https://github.com/dewe/feiky/issues"
   },
-  "homepage": "https://github.com/dewe/feiky"
+  "homepage": "https://github.com/dewe/feiky",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "mocha": "^2.2.5",
+    "request": "^2.57.0"
+  },
+  "dependencies": {
+    "last-request": "0.0.4",
+    "log4js": "^0.6.25"
+  }
 }
