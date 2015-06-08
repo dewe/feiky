@@ -26,6 +26,9 @@
   "homepage": "https://github.com/dewe/feiky",
   "devDependencies": {
     "chai": "^3.0.0",
+    "grunt": "^0.4.5",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-release": "^0.12.0",
     "mocha": "^2.2.5",
     "request": "^2.57.0"
   },
