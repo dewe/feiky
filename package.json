@@ -33,7 +33,7 @@
     "request": "^2.57.0"
   },
   "dependencies": {
-    "last-request": "0.0.4",
+    "last-request": "~0.0.4",
     "log4js": "^0.6.25"
   }
 }
