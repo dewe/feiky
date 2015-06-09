@@ -38,6 +38,12 @@ describe('Starting and stopping', function () {
         });
     });
 
+    it('throws if listen() is called while listening', function () {
+        assert.throw(function () {
+            server.listen(1234);
+        });
+    });
+
     before(function () {
         savedLogLevel = process.env.LOG_LEVEL;
         process.env.LOG_LEVEL = 'FATAL';
