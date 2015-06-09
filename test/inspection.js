@@ -59,8 +59,8 @@ describe('Inspection features', function () {
         request.get(url, function () {
             server.register('GET');
             request.get(url, function () {
-                assert.isArray(server.requestHistory());
-                assert.lengthOf(server.requestHistory(), 2);
+                assert.isArray(server.requests());
+                assert.lengthOf(server.requests(), 2);
                 done();
             });
         });

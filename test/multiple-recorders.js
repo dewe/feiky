@@ -29,7 +29,7 @@ describe('Multiple recorders', function () {
 
     it('does not share requests objects between recorders', function(done){
         request.get('http://localhost:8000', function () {
-            assert.notStrictEqual(recorder.requests(), server.requestHistory());
+            assert.notStrictEqual(recorder.requests(), server.requests());
             assert.notStrictEqual(recorder.lastRequest(), server.lastRequest());
             assert.deepEqual(recorder.lastRequest(), server.lastRequest());
             done();
