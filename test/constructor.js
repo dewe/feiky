@@ -36,7 +36,7 @@ describe('Constructor', function () {
         });
     });
 
-    it('accepts injected historyRecorder', function (done) {
+    it('accepts extra historyRecorder', function (done) {
         var recorder = require('last-request')();
         server = feiky({
             port: 4711,
