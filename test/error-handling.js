@@ -1,33 +1,27 @@
-/* global require, describe, it, before, after, beforeEach, afterEach */
 'use strict';
 
-var assert = require('chai').assert,
-    request = require('request');
+var assert = require('chai').assert;
 
 var savedLogLevel;
-
-// NOTE: running tests with log level 'FATAL' to suppress logging during mock server tests.
 
 describe('Error handling and misconfiguration', function () {
     var server = require('../index.js')(),
         port = 8000,
         url = 'http://localhost:' + port;
 
-    it('should return 500 if no handlers', function (done) {
-        request.get(url, function (err, res, body) {
-            assert(res.statusCode === 500);
-            assert.include(body, 'Missing handler');
-            done();
-        });
+    it('should return 500 if no handlers', async function () {
+        var res = await fetch(url);
+        var body = await res.text();
+        assert(res.status === 500);
+        assert.include(body, 'Missing handler');
     });
 
-    it('should return 500 if handler throws error', function (done) {
+    it('should return 500 if handler throws error', async function () {
         server.register('GET', '/', function () { throw new Error('Dummy message: internal error'); });
-        request.get(url, function (err, res, body) {
-            assert(res.statusCode === 500);
-            assert.include(body, 'Dummy message: internal error');
-            done();
-        });
+        var res = await fetch(url);
+        var body = await res.text();
+        assert(res.status === 500);
+        assert.include(body, 'Dummy message: internal error');
     });
 
     before(function () {

@@ -1,8 +1,6 @@
-/* global require, describe, it, before, after, beforeEach, afterEach */
 'use strict';
 
 var assert = require('chai').assert,
-    request = require('request'),
     feiky = require('..'),
     lastRequest = require('last-request');
 
@@ -12,28 +10,22 @@ describe('Multiple recorders', function () {
         historyRecorder: recorder
     });
 
-    it('records to internal historyRecorder', function (done) {
-        request.get('http://localhost:8000', function (err, res) {
-            assert(res.statusCode === 200);
-            assert.equal(server.lastRequest().method, 'GET');
-            done();
-        });
+    it('records to internal historyRecorder', async function () {
+        var res = await fetch('http://localhost:8000');
+        assert(res.status === 200);
+        assert.equal(server.lastRequest().method, 'GET');
     });
 
-    it('records to extra historyRecorder', function (done) {
-        request.get('http://localhost:8000', function () {
-            assert.equal(recorder.lastRequest().method, 'GET');
-            done();
-        });
+    it('records to extra historyRecorder', async function () {
+        await fetch('http://localhost:8000');
+        assert.equal(recorder.lastRequest().method, 'GET');
     });
 
-    it('does not share requests objects between recorders', function(done){
-        request.get('http://localhost:8000', function () {
-            assert.notStrictEqual(recorder.requests(), server.requests());
-            assert.notStrictEqual(recorder.lastRequest(), server.lastRequest());
-            assert.deepEqual(recorder.lastRequest(), server.lastRequest());
-            done();
-        });
+    it('does not share requests objects between recorders', async function () {
+        await fetch('http://localhost:8000');
+        assert.notStrictEqual(recorder.requests(), server.requests());
+        assert.notStrictEqual(recorder.lastRequest(), server.lastRequest());
+        assert.deepEqual(recorder.lastRequest(), server.lastRequest());
     });
 
     beforeEach(function (done) {

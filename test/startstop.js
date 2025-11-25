@@ -1,41 +1,30 @@
-/* global require, describe, it, before, after, beforeEach, afterEach */
 'use strict';
 
-var assert = require('chai').assert,
-    request = require('request');
+var assert = require('chai').assert;
 
 var savedLogLevel;
-
-// NOTE: running tests with log level 'FATAL' to suppress logging during mock server tests.
 
 describe('Starting and stopping', function () {
     var server = require('../index.js')(),
         port = 8000,
         url = 'http://localhost:' + port;
 
-    it('should clear request history when starting listening', function (done) {
+    it('should clear request history when starting listening', async function () {
         server.register('GET');
-        request.get(url, function () { // ensure there's some history
-            server.close(function () {     // restart server
-                server.listen(port, function () {
-                    assert.isUndefined(server.lastRequest());
-                    done();
-                });
-            });
-        });
+        await fetch(url);
+        await new Promise(resolve => server.close(resolve));
+        await new Promise(resolve => server.listen(port, resolve));
+        assert.isUndefined(server.lastRequest());
     });
 
-    it('should clear route handlers when starting listening', function (done) {
+    it('should clear route handlers when starting listening', async function () {
         server.register('GET');
-        server.close(function () {     // restart server
-            server.listen(port, function () {
-                request.get(url, function (err, res, body) {
-                    assert.equal(res.statusCode, 500);
-                    assert.include(body, 'Missing handler');
-                    done();
-                });
-            });
-        });
+        await new Promise(resolve => server.close(resolve));
+        await new Promise(resolve => server.listen(port, resolve));
+        var res = await fetch(url);
+        var body = await res.text();
+        assert.equal(res.status, 500);
+        assert.include(body, 'Missing handler');
     });
 
     it('throws if listen() is called while listening', function () {
