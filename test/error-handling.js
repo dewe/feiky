@@ -14,7 +14,6 @@ describe('Error handling and misconfiguration', function () {
         url = 'http://localhost:' + port;
 
     it('should return 500 if no handlers', function (done) {
-        server.clearHandlers();
         request.get(url, function (err, res, body) {
             assert(res.statusCode === 500);
             assert.include(body, 'Missing handler');
@@ -23,7 +22,7 @@ describe('Error handling and misconfiguration', function () {
     });
 
     it('should return 500 if handler throws error', function (done) {
-        server.setHandler(function () { throw new Error('Dummy message: internal error'); });
+        server.register('GET', '/', function () { throw new Error('Dummy message: internal error'); });
         request.get(url, function (err, res, body) {
             assert(res.statusCode === 500);
             assert.include(body, 'Dummy message: internal error');

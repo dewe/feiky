@@ -35,10 +35,10 @@ describe('Simple routes', function () {
 
     it('register route with handler', function (done) {
         server.register('GET', /.*/, function (req, res) {
-            res.statusCode = 123;
+            res.statusCode = 201;
         });
         request.get(url, function (err, res, body) {
-            assert.equal(res.statusCode, 123);
+            assert.equal(res.statusCode, 201);
             done();
         });
     });

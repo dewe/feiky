@@ -44,9 +44,8 @@ describe('Inspection features', function () {
 
     it('should save request history before handler is called', function (done) {
         var lastRequest;
-        server.setHandler(function () {
+        server.register('GET', '/', function () {
             lastRequest = server.lastRequest();
-
         });
         request.get(url, function () {
             assert.isDefined(lastRequest);

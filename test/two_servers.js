@@ -12,8 +12,8 @@ describe('Two fake servers', function () {
             server_two = feiky();
 
         it('should not share handlers', function (done) {
-            server_one.addHandler(function (req, res) { res.end('handler one'); });
-            server_two.addHandler(function (req, res) { res.end('handler two'); });
+            server_one.register('GET', '/', 200, 'handler one');
+            server_two.register('GET', '/', 200, 'handler two');
 
             // verify that server_two's handler is being used.
             request.get('http://localhost:8001', function (err, res, body) {
